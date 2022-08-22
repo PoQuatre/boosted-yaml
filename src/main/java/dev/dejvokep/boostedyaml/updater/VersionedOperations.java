@@ -68,7 +68,7 @@ public class VersionedOperations {
             throw new UnsupportedOperationException(String.format("Downgrading is not enabled (%s > %s)!", defaultsVersion.asID(), documentVersion.asID()));
 
         //No update needed
-        if (compared == 0)
+        if (compared == 0 && !settings.isAlwaysUpdate())
             return true;
 
         //If not downgrading

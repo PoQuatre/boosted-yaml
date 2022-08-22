@@ -82,6 +82,10 @@ public class UpdaterSettings {
      */
     public static final boolean DEFAULT_KEEP_ALL = false;
     /**
+     * If to enable always update by default.
+     */
+    public static final boolean DEFAULT_ALWAYS_UPDATE = false;
+    /**
      * Default option sorting.
      */
     public static final OptionSorting DEFAULT_OPTION_SORTING = OptionSorting.SORT_BY_DEFAULTS;
@@ -109,6 +113,8 @@ public class UpdaterSettings {
     private final boolean enableDowngrading;
     //Keep all contents
     private final boolean keepAll;
+    //Always update
+    private final boolean alwaysUpdate;
     //Merge rules
     private final Map<MergeRule, Boolean> mergeRules;
     //Routes to ignore
@@ -133,6 +139,7 @@ public class UpdaterSettings {
         this.autoSave = builder.autoSave;
         this.enableDowngrading = builder.enableDowngrading;
         this.keepAll = builder.keepAll;
+        this.alwaysUpdate = builder.alwaysUpdate;
         this.optionSorting = builder.optionSorting;
         this.mergeRules = builder.mergeRules;
         this.ignored = builder.ignored;
@@ -227,6 +234,15 @@ public class UpdaterSettings {
     }
 
     /**
+     * Returns if to always update the document.
+     *
+     * @return if to always update the document
+     */
+    public boolean isAlwaysUpdate() {
+        return alwaysUpdate;
+    }
+
+    /**
      * Sets if the file should automatically be saved using {@link YamlDocument#save()} after the updater has finished
      * updating (does not save if nothing's changed).
      *
@@ -285,6 +301,8 @@ public class UpdaterSettings {
         private boolean enableDowngrading = DEFAULT_ENABLE_DOWNGRADING;
         //Keep all contents
         private boolean keepAll = DEFAULT_KEEP_ALL;
+        //Always update
+        private boolean alwaysUpdate = DEFAULT_ALWAYS_UPDATE;
         //Merge rules
         private final Map<MergeRule, Boolean> mergeRules = new HashMap<>(DEFAULT_MERGE_RULES);
         //Routes to ignore
@@ -360,6 +378,19 @@ public class UpdaterSettings {
          */
         public Builder setKeepAll(boolean keepAll) {
             this.keepAll = keepAll;
+            return this;
+        }
+
+        /**
+         * Sets if to always update the document even if it's unnecessary according to DVS
+         * <p>
+         * <b>Default: </b>{@link #DEFAULT_ALWAYS_UPDATE}
+         *
+         * @param alwaysUpdate If to enable always update the document
+         * @return the builder
+         */
+        public Builder setAlwaysUpdate(boolean alwaysUpdate) {
+            this.alwaysUpdate = alwaysUpdate;
             return this;
         }
 
