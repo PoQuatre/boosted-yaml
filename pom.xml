@@ -23,7 +23,7 @@
 
     <!-- Artifact data -->
     <artifactId>boosted-yaml</artifactId>
-    <groupId>dev.dejvokep</groupId>
+    <groupId>fr.sceorus</groupId>
     <version>1.3</version>
     <name>BoostedYAML</name>
     <description>A simple-to-use library delivering boosted experience while working with YAML files.</description>
@@ -47,9 +47,13 @@
 
     <!-- Distribution management -->
     <distributionManagement>
+        <repository>
+            <id>sceorus-releases</id>
+            <url>https://repo.sceorus.fr/releases</url>
+        </repository>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+            <id>sceorus-snapshots</id>
+            <url>https://repo.sceorus.fr/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -95,7 +99,7 @@
                     <!-- MANIFEST.MF file exclusion -->
                     <filters>
                         <filter>
-                            <artifact>dev.dejvokep:*</artifact>
+                            <artifact>fr.sceorus:*</artifact>
                             <excludes>
                                 <exclude>META-INF/MANIFEST.MF</exclude>
                             </excludes>
@@ -140,17 +144,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.2.0</version>
@@ -178,24 +171,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                        <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
             </plugin>
@@ -216,11 +191,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!--  Repositories  -->
+    <repositories>
+        <!-- Sceorus -->
+        <repository>
+            <id>sceorus-snapshots</id>
+            <url>https://repo.sceorus.fr/snapshots/</url>
+        </repository>
+    </repositories>
+
     <!-- Dependencies -->
     <dependencies>
         <!-- SnakeYAML -->
         <dependency>
-            <groupId>org.snakeyaml</groupId>
+            <groupId>fr.sceorus</groupId>
             <artifactId>snakeyaml-engine</artifactId>
             <version>2.4-SNAPSHOT</version>
         </dependency>
